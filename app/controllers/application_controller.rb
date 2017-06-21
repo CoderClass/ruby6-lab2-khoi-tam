@@ -9,4 +9,12 @@ class ApplicationController < ActionController::Base
   def signed_in?
     current_user
   end
+  
+  def require_login
+    redirect_to login_path, :flash => { :error => "Insufficient rights!" } unless signed_in?
+  end
+   
+  def skip_if_logged_in
+    redirect_to users_path if signed_in?
+  end
 end
