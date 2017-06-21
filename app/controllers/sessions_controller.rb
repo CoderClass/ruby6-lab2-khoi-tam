@@ -28,4 +28,12 @@ class SessionsController < ApplicationController
     params.permit(:email, :password)
   end
 
+  def callback
+    if user = User.from_omniauth(env["omniauth.auth"])
+      # log in user here
+    else
+      # don't log user in
+    end
+  end
+
 end
